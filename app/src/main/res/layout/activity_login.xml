@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="동심"
+        android:textSize="50sp"
+        android:textColor="#000000"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:layout_marginTop="180dp"/>
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="카카오톡으로 로그인하기"
+        android:textSize="20sp"
+        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:layout_marginTop="150dp"/>
+
+</LinearLayout>
