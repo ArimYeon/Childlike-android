@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="150dp"
-    android:layout_height="150dp"
+    android:layout_height="120dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center">
@@ -13,7 +13,7 @@
         android:text="@string/tree"
         android:textColor="@color/mainText"
         android:textSize="@dimen/select_test_item_size"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:fontFamily="@font/nanum_gothic_bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -7,21 +7,28 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="동심"
         android:textSize="50sp"
         android:textColor="#000000"
         android:fontFamily="@font/gmarket_sans_ttf_medium"
-        android:layout_marginTop="180dp"/>
+        android:layout_marginTop="180dp"/>-->
+
+    <ImageView
+        android:layout_width="328dp"
+        android:layout_height="128dp"
+        android:layout_marginTop="180dp"
+        android:src="@drawable/logo_text4" />
+
     <Button
         android:id="@+id/login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="카카오톡으로 로그인하기"
         android:textSize="20sp"
-        android:fontFamily="@font/gmarket_sans_ttf_medium"
+        android:fontFamily="@font/nanum_gothic_bold"
         android:layout_marginTop="150dp"/>
 
 </LinearLayout>

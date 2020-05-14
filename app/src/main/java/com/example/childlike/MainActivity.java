@@ -7,17 +7,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<SelectTestItem> list = new ArrayList<>();
+    ImageView mypageBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mypageBtn = findViewById(R.id.mypage_btn);
+
+        setListeners();
 
         // 리사이클러뷰에 표시할 데이터 리스트 생성.
         list.add(new SelectTestItem("나무"));
@@ -48,5 +54,15 @@ public class MainActivity extends AppCompatActivity {
             }
         }) ;
         recyclerView.setAdapter(adapter);
+    }
+
+    private void setListeners(){
+        mypageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
