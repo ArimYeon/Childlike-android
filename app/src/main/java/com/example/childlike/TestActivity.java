@@ -5,9 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import static com.example.childlike.MainActivity.TEST_TITLE;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -28,7 +29,7 @@ public class TestActivity extends AppCompatActivity {
 
     private void getIntentData(){
         Intent intent = getIntent();
-        String testTitle = intent.getExtras().getString("testTitle");
+        String testTitle = intent.getExtras().getString(TEST_TITLE);
         title.setText(testTitle+" 테스트");
     }
 
