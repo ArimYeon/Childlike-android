@@ -12,5 +12,7 @@
     <string name="sex">성별</string>
 
     <string name="mypage_title">마이페이지</string>
+    <string name="add_user">사용자 추가하기</string>
+    <string name="show_result">결과보기</string>
 
 </resources>

@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    public final static String TEST_TITLE = "testTitle";
+
     ArrayList<SelectTestItem> list = new ArrayList<>();
     ImageView mypageBtn;
 
@@ -24,18 +26,7 @@ public class MainActivity extends AppCompatActivity {
         mypageBtn = findViewById(R.id.mypage_btn);
 
         setListeners();
-
-        // 리사이클러뷰에 표시할 데이터 리스트 생성.
-        list.add(new SelectTestItem("나무"));
-        list.add(new SelectTestItem("집"));
-        list.add(new SelectTestItem("사람"));
-        list.add(new SelectTestItem("어항"));
-        list.add(new SelectTestItem("나무"));
-        list.add(new SelectTestItem("나무"));
-        list.add(new SelectTestItem("사람"));
-        list.add(new SelectTestItem("어항"));
-        list.add(new SelectTestItem("사람"));
-        list.add(new SelectTestItem("어항"));
+        initList();
 
         // 리사이클러뷰에 LinearLayoutManager 객체 지정.
         RecyclerView recyclerView = findViewById(R.id.select_test_recycler);
@@ -49,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 SelectTestItem item = list.get(position);
                 String testTitle = item.getTitle();
                 Intent intent = new Intent(getApplicationContext(), TestActivity.class);
-                intent.putExtra("testTitle", testTitle);
+                intent.putExtra(TEST_TITLE, testTitle);
                 startActivity(intent);
             }
         }) ;
@@ -64,5 +55,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void initList(){
+        // 리사이클러뷰에 표시할 데이터 리스트 생성.
+        list.add(new SelectTestItem("나무"));
+        list.add(new SelectTestItem("집"));
+        list.add(new SelectTestItem("사람"));
+        list.add(new SelectTestItem("어항"));
+        list.add(new SelectTestItem("나무"));
+        list.add(new SelectTestItem("나무"));
+        list.add(new SelectTestItem("사람"));
+        list.add(new SelectTestItem("어항"));
+        list.add(new SelectTestItem("사람"));
+        list.add(new SelectTestItem("어항"));
     }
 }
