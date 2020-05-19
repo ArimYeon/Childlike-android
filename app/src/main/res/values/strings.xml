@@ -15,4 +15,8 @@
     <string name="add_user">사용자 추가하기</string>
     <string name="show_result">결과보기</string>
 
+    <string name="result_title">결과</string>
+    <string name="date">날짜</string>
+    <string name="processing">분석중...dsjaldkjfalskjgaosidjfqkejflaksdjgaosjwlkf</string>
+
 </resources>
