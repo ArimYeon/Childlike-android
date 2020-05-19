@@ -44,6 +44,15 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View v, int position) {
                 //리사이클러뷰 객체 누르면 결과 상세페이지로 구현
+                ResultItem item = list.get(position);
+                int img = item.getImg();
+                String date = item.getDate();
+                String result = item.getResult();
+                Intent intent = new Intent(getApplicationContext(), DetailResultActivity.class);
+                intent.putExtra("img", img);
+                intent.putExtra("date", date);
+                intent.putExtra("result", result);
+                startActivity(intent);
             }
         }) ;
         recyclerView.setAdapter(adapter);
@@ -73,10 +82,10 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void initList(){
-        list.add(new ResultItem("20.05.19", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
-        list.add(new ResultItem("20.05.18", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
-        list.add(new ResultItem("20.04.19", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
-        list.add(new ResultItem("20.01.19", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
-        list.add(new ResultItem("19.05.19", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
+        list.add(new ResultItem(R.drawable.logo3, "20.05.19", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
+        list.add(new ResultItem(R.drawable.logo3, "20.05.18", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
+        list.add(new ResultItem(R.drawable.logo3, "20.04.19", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
+        list.add(new ResultItem(R.drawable.logo3, "20.01.19", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
+        list.add(new ResultItem(R.drawable.logo3, "19.05.19", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
     }
 }
