@@ -1,9 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailResultActivity">
+    tools:context=".DetailResultActivity"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_title_margin">
+
+        <ImageView
+            android:id="@+id/detail_result_back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/detail_result_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_title_margin"
+            android:fontFamily="@font/nanum_gothic_bold"
+            android:text="@string/detail_result_title"
+            android:textColor="@color/titleText"
+            android:textSize="@dimen/activity_title_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20.05.19"
+        android:fontFamily="@font/nanum_gothic_bold"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/text"/>
+    <ImageView
+        android:id="@+id/user_image"
+        android:layout_width="200dp"
+        android:layout_height="300dp"
+        android:src="@drawable/t80"/>
+    <TextView
+        android:id="@+id/result_text"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:text="@string/result"
+        android:textColor="@color/text"
+        android:textSize="@dimen/text_size"
+        android:fontFamily="@font/nanum_gothic_bold"
+        android:scrollbars="vertical" />
+
+</LinearLayout>

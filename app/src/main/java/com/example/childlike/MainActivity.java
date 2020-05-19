@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 리사이클러뷰에 LinearLayoutManager 객체 지정.
         RecyclerView recyclerView = findViewById(R.id.select_test_recycler);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
 
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
         SelectTestAdapter adapter = new SelectTestAdapter(list);
@@ -62,12 +62,5 @@ public class MainActivity extends AppCompatActivity {
         list.add(new SelectTestItem("나무"));
         list.add(new SelectTestItem("집"));
         list.add(new SelectTestItem("사람"));
-        list.add(new SelectTestItem("어항"));
-        list.add(new SelectTestItem("나무"));
-        list.add(new SelectTestItem("나무"));
-        list.add(new SelectTestItem("사람"));
-        list.add(new SelectTestItem("어항"));
-        list.add(new SelectTestItem("사람"));
-        list.add(new SelectTestItem("어항"));
     }
 }
