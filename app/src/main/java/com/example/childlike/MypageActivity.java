@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,7 @@ import static com.example.childlike.LoginActivity.CODE;
 public class MypageActivity extends AppCompatActivity {
 
     private final static int INFO_REQ_CODE = 101;
+    private final static int RESULT_FROM_MYPAGE_CODE = 201;
     public static String SELECTED_USER;
 
     ArrayList<MypageItem> list = new ArrayList<>();
@@ -36,7 +38,19 @@ public class MypageActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.mypage_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // 리사이클러뷰에 MypageAdapter 객체 지정.
         MypageAdapter adapter = new MypageAdapter(list);
+        adapter.setOnButtonClickListener(new MypageAdapter.OnButtonClickListener() {
+            @Override
+            public void onButtonClick(View v, int position) {
+                MypageItem item = list.get(position);
+                String name = item.getName();
+                Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                intent.putExtra("name", name);
+                intent.putExtra("code",RESULT_FROM_MYPAGE_CODE);
+                startActivity(intent);
+            }
+        }) ;
         recyclerView.setAdapter(adapter);
     }
 

@@ -22,10 +22,15 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
     private RadioGroup lastCheckedRG = null;
     private ArrayList<MypageItem> mData = null;
     // 리스너 객체 참조를 저장하는 변수
-    private OnItemClickListener mListener = null ;
+    private OnButtonClickListener mListener = null ;
 
-    public interface OnItemClickListener {
-        void onItemClick(View v, int position) ;
+    public interface OnButtonClickListener {
+        void onButtonClick(View v, int position) ;
+    }
+
+    // OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
+    public void setOnButtonClickListener(OnButtonClickListener listener) {
+        this.mListener = listener ;
     }
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
@@ -65,6 +70,12 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
                 @Override
                 public void onClick(View view) {
                     //결과보기 버튼 구현
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        if(mListener != null){
+                            mListener.onButtonClick(view, pos);
+                        }
+                    }
                 }
             });
         }
