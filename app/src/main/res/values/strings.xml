@@ -14,6 +14,8 @@
     <string name="mypage_title">마이페이지</string>
     <string name="add_user">사용자 추가하기</string>
     <string name="show_result">결과보기</string>
+    <string name="member_info">계정 정보</string>
+    <string name="logout">로그아웃</string>
 
     <string name="result_title">결과</string>
     <string name="date">날짜</string>
@@ -30,4 +32,6 @@
     스트레스도 없고 행복합니다. 이대로만 계속 자라면 좋겠습니다.
     스트레스도 없고 행복합니다. 이대로만 계속 자라면 좋겠습니다.
     스트레스도 없고 행복합니다. 이대로만 계속 자라면 좋겠습니다.</string>
+
+    <string name="kakao_app_key">059b303b471209a35e38c09ef2301bc0</string>
 </resources>

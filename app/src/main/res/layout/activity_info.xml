@@ -12,16 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_title_margin">
 
-        <ImageView
-            android:id="@+id/info_back_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/back"
-            android:layout_marginStart="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/test_title"
             android:layout_width="wrap_content"

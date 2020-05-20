@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.childlike.dataclass.SelectTestItem;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {

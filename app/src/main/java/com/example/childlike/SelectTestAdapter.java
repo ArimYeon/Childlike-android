@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.childlike.dataclass.SelectTestItem;
+
 import java.util.ArrayList;
 
 public class SelectTestAdapter extends RecyclerView.Adapter<SelectTestAdapter.ViewHolder>{

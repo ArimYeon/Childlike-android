@@ -1,4 +1,4 @@
-package com.example.childlike;
+package com.example.childlike.dataclass;
 
 public class ResultItem {
 
