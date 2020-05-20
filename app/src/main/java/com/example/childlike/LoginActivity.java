@@ -33,6 +33,7 @@ import java.security.NoSuchAlgorithmException;
 public class LoginActivity extends AppCompatActivity {
 
     Session session;
+    public static String kProfileImg;
     public static String kNick;
     public static String kAge;
     public static String kEmail;
@@ -132,6 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("KAKAO_API", "profile image: " + profile.getProfileImageUrl());
                             Log.d("KAKAO_API", "thumbnail image: " + profile.getThumbnailImageUrl());
                             kNick = profile.getNickname();
+                            kProfileImg = profile.getThumbnailImageUrl();
                         } else if (kakaoAccount.profileNeedsAgreement() == OptionalBoolean.TRUE) {
                             // 동의 요청 후 프로필 정보 획득 가능
                         } else {
