@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
@@ -17,6 +18,7 @@ import static com.example.childlike.LoginActivity.kAge;
 import static com.example.childlike.LoginActivity.kEmail;
 import static com.example.childlike.LoginActivity.kGender;
 import static com.example.childlike.LoginActivity.kNick;
+import static com.example.childlike.LoginActivity.kProfileImg;
 
 public class MemberInfoActivity extends AppCompatActivity {
 
@@ -41,6 +43,7 @@ public class MemberInfoActivity extends AppCompatActivity {
     }
 
     private void setProfile(){
+        imageDownload();
         nick.setText(kNick+" 님");
         email.setText(kEmail);
         age.setText(kAge);
@@ -60,6 +63,10 @@ public class MemberInfoActivity extends AppCompatActivity {
                 logout();
             }
         });
+    }
+
+    private void imageDownload(){
+        Glide.with(this).load(kProfileImg).into(profileImg);
     }
 
     private void logout(){
