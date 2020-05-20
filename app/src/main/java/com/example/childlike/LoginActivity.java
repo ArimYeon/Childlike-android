@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.childlike.kakaologin.SessionCallback;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -34,6 +33,10 @@ import java.security.NoSuchAlgorithmException;
 public class LoginActivity extends AppCompatActivity {
 
     Session session;
+    public static String kNick;
+    public static String kAge;
+    public static String kEmail;
+    public static String kGender;
 
     public final static String CODE = "code";
     Button loginBtn;
@@ -114,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                         String email = kakaoAccount.getEmail();
                         if (email != null) {
                             Log.i("KAKAO_API", "email: " + email);
+                            kEmail = email;
                         } else if (kakaoAccount.emailNeedsAgreement() == OptionalBoolean.TRUE) {
                             // 동의 요청 후 이메일 획득 가능
                             // 단, 선택 동의로 설정되어 있다면 서비스 이용 시나리오 상에서 반드시 필요한 경우에만 요청해야 합니다.
@@ -127,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("KAKAO_API", "nickname: " + profile.getNickname());
                             Log.d("KAKAO_API", "profile image: " + profile.getProfileImageUrl());
                             Log.d("KAKAO_API", "thumbnail image: " + profile.getThumbnailImageUrl());
+                            kNick = profile.getNickname();
                         } else if (kakaoAccount.profileNeedsAgreement() == OptionalBoolean.TRUE) {
                             // 동의 요청 후 프로필 정보 획득 가능
                         } else {
@@ -137,12 +142,14 @@ public class LoginActivity extends AppCompatActivity {
                         AgeRange ageRange = kakaoAccount.getAgeRange();
                         if(ageRange != null){
                             Log.d("KAKAO API", "age range: "+ageRange.getValue());
+                            kAge = ageRange.getValue();
                         }
 
                         //성별
                         Gender gender = kakaoAccount.getGender();
                         if(gender != null){
                             Log.d("KAKAO API", "gender: "+gender.getValue());
+                            kGender = gender.getValue();
                         }
                     }
                     redirectInfoActivity();

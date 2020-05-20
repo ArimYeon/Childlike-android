@@ -24,7 +24,7 @@ public class MypageActivity extends AppCompatActivity {
 
     ArrayList<MypageItem> list = new ArrayList<>();
     ImageView backBtn;
-    Button addUserBtn;
+    Button addUserBtn, memberInfoBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class MypageActivity extends AppCompatActivity {
 
         backBtn = findViewById(R.id.mypage_back_btn);
         addUserBtn = findViewById(R.id.add_user_btn);
+        memberInfoBtn = findViewById(R.id.member_info_btn);
         setListeners();
         initList();
 
@@ -68,6 +69,13 @@ public class MypageActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), InfoActivity.class);
                 intent.putExtra(CODE, 101);
                 startActivityForResult(intent, INFO_REQ_CODE);
+            }
+        });
+        memberInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MemberInfoActivity.class);
+                startActivity(intent);
             }
         });
     }
