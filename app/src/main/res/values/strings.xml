@@ -35,6 +35,7 @@
     <string name="member_info_title">계정 정보</string>
     <string name="email">이메일</string>
     <string name="logout">로그아웃</string>
+    <string name="withdrawal">회원 탈퇴</string>
 
     <string name="kakao_app_key">059b303b471209a35e38c09ef2301bc0</string>
 </resources>

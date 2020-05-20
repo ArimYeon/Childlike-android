@@ -35,9 +35,9 @@ public class LoginActivity extends AppCompatActivity {
     Session session;
     public static String kProfileImg;
     public static String kNick;
-    public static String kAge;
-    public static String kEmail;
-    public static String kGender;
+    public static String kAge = "비공개";
+    public static String kEmail = "비공개";
+    public static String kGender = "비공개";
 
     public final static String CODE = "code";
     Button loginBtn;
@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
         public void requestMe() {
             // 사용자정보 요청 결과에 대한 Callback
             UserManagement.getInstance().me(new MeV2ResponseCallback() {
-                // 세션 오픈 실패. 세션이 삭제된 경우,
+                // 세션 오픈 실패. 세션이 삭제된 경우
                 @Override
                 public void onSessionClosed(ErrorResult errorResult) {
                     Log.e("KAKAO_API", "세션이 닫혀 있음: " + errorResult);
@@ -121,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                             kEmail = email;
                         } else if (kakaoAccount.emailNeedsAgreement() == OptionalBoolean.TRUE) {
                             // 동의 요청 후 이메일 획득 가능
-                            // 단, 선택 동의로 설정되어 있다면 서비스 이용 시나리오 상에서 반드시 필요한 경우에만 요청해야 합니다.
+                            // 단, 선택 동의로 설정되어 있다면 서비스 이용 시나리오 상에서 반드시 필요한 경우에만 요청해야 함
                         } else {
                             // 이메일 획득 불가
                         }
