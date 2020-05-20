@@ -14,7 +14,6 @@ import static com.example.childlike.MypageActivity.SELECTED_USER;
 
 public class InfoActivity extends AppCompatActivity {
 
-    ImageView backBtn;
     TextView cmpBtn, name, age;
     Spinner sex;
     int code;
@@ -24,7 +23,6 @@ public class InfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
 
-        backBtn = findViewById(R.id.info_back_btn);
         cmpBtn = findViewById(R.id.info_cmp_btn);
         name = findViewById(R.id.name_text);
         age = findViewById(R.id.age_text);
@@ -35,12 +33,6 @@ public class InfoActivity extends AppCompatActivity {
     }
 
     private void setListeners(){
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
         cmpBtn.setOnClickListener(new View.OnClickListener() {
             Intent intent;
             @Override

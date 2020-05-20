@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.childlike.dataclass.ResultItem;
+
 import java.util.ArrayList;
 
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder>{

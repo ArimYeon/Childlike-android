@@ -43,7 +43,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mypage_recycler"
         android:layout_width="wrap_content"
-        android:layout_height="500dp"
+        android:layout_height="300dp"
         app:layout_constraintBottom_toTopOf="@+id/add_user_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,8 +56,19 @@
         android:fontFamily="@font/nanum_gothic_bold"
         android:text="@string/add_user"
         android:layout_margin="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mypage_recycler"/>
+
+    <Button
+        android:id="@+id/member_info_btn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanum_gothic_bold"
+        android:text="@string/member_info"
+        android:layout_margin="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_user_btn"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
