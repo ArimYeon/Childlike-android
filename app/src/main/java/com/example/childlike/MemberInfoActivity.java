@@ -11,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
+import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 
 import static com.example.childlike.LoginActivity.kAge;
 import static com.example.childlike.LoginActivity.kEmail;
@@ -23,7 +25,7 @@ import static com.example.childlike.LoginActivity.kProfileImg;
 public class MemberInfoActivity extends AppCompatActivity {
 
     ImageView mInfoBtn, profileImg;
-    Button logoutBtn;
+    Button logoutBtn, withdrawalBtn;
     TextView nick, email, age, gender;
 
     @Override
@@ -38,6 +40,7 @@ public class MemberInfoActivity extends AppCompatActivity {
         email = findViewById(R.id.email_text);
         age = findViewById(R.id.age_text);
         gender = findViewById(R.id.gender_text);
+        withdrawalBtn = findViewById(R.id.withdrawal_btn);
         setListners();
         setProfile();
     }
@@ -63,10 +66,18 @@ public class MemberInfoActivity extends AppCompatActivity {
                 logout();
             }
         });
+        withdrawalBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                withdrawal();
+            }
+        });
     }
 
     private void imageDownload(){
-        Glide.with(this).load(kProfileImg).into(profileImg);
+        if(kProfileImg != null){
+            Glide.with(this).load(kProfileImg).into(profileImg);
+        }
     }
 
     private void logout(){
@@ -79,8 +90,29 @@ public class MemberInfoActivity extends AppCompatActivity {
         });
     }
 
+    private void withdrawal(){
+        UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
+            @Override
+            public void onSessionClosed(ErrorResult errorResult) {
+                Log.e("KAKAO_API", "세션이 닫혀 있음: " + errorResult);
+            }
+
+            @Override
+            public void onFailure(ErrorResult errorResult) {
+                Log.e("KAKAO_API", "연결 끊기 실패: " + errorResult);
+
+            }
+            @Override
+            public void onSuccess(Long result) {
+                Log.i("KAKAO_API", "연결 끊기 성공. id: " + result);
+                redirectLoginActivity();
+            }
+        });
+    }
+
     private void redirectLoginActivity(){
         final Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 }
