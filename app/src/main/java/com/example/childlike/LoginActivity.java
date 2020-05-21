@@ -3,7 +3,9 @@ package com.example.childlike;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -154,7 +156,14 @@ public class LoginActivity extends AppCompatActivity {
                             kGender = gender.getValue();
                         }
                     }
-                    redirectInfoActivity();
+                    SharedPreferences loginPref = getSharedPreferences("loginPref", MODE_PRIVATE);
+                    int isLogin = loginPref.getInt("isLogin",0);
+                    if(isLogin==0){
+                        redirectInfoActivity();
+                    }
+                    else if(isLogin==1){
+                        redirectMainActivity();
+                    }
                 }
             });
         }
@@ -177,9 +186,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void redirectInfoActivity(){
+        SharedPreferences loginPref = getSharedPreferences("loginPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = loginPref.edit();
+        editor.putInt("isLogin", 1);
+        editor.commit();
+
         final Intent intent = new Intent(getApplicationContext(), InfoActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         intent.putExtra("code", 100);
+        startActivity(intent);
+        finish();
+    }
+
+    private void redirectMainActivity(){
+        final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         finish();
     }
