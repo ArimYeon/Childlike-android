@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +13,8 @@ import android.widget.ImageView;
 import com.example.childlike.dataclass.SelectTestItem;
 
 import java.util.ArrayList;
+
+import static com.example.childlike.MypageActivity.SELECTED_USER;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         mypageBtn = findViewById(R.id.mypage_btn);
 
+        getSelectedUser();
         setListeners();
         initList();
 
@@ -57,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void getSelectedUser(){
+        SharedPreferences a = getSharedPreferences("a", MODE_PRIVATE);
+        SELECTED_USER = a.getString("selectedUser","");
     }
 
     private void initList(){

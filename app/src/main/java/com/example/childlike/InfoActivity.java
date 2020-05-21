@@ -3,6 +3,7 @@ package com.example.childlike;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Spinner;
@@ -36,16 +37,20 @@ public class InfoActivity extends AppCompatActivity {
             Intent intent;
             @Override
             public void onClick(View view) {
+                SELECTED_USER = name.getText().toString();
+                SharedPreferences a = getSharedPreferences("a", MODE_PRIVATE);
+                SharedPreferences.Editor editor = a.edit();
+                editor.putString("selectedUser", SELECTED_USER);
+                editor.commit();
                 if(code == 100) {
-                    SELECTED_USER = name.getText().toString();
                     intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
                 else if(code == 101){
-                    intent = new Intent();
-                    setResult(RESULT_OK, intent);
-                    finish();
+                    intent = new Intent(getApplicationContext(), MypageActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 }
             }
         });

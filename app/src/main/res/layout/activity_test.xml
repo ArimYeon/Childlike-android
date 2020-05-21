@@ -36,6 +36,46 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.example.childlike.draw.DrawView
+        android:id="@+id/painter"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel_exe"
+            android:textSize="@dimen/button_text_size"
+            android:textColor="@color/buttonText"
+            android:fontFamily="@font/nanum_gothic" />
+        <Button
+            android:id="@+id/reset_btn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/reset"
+            android:textSize="@dimen/button_text_size"
+            android:textColor="@color/buttonText"
+            android:fontFamily="@font/nanum_gothic"
+            android:layout_marginStart="10dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/complete_btn"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:text="@string/test_complete"
+        android:textSize="@dimen/button_text_size"
+        android:textColor="@color/buttonText"
+        android:fontFamily="@font/nanum_gothic"
+        android:layout_marginTop="5dp"/>
+
 </LinearLayout>

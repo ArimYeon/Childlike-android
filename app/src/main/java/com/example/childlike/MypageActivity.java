@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +38,10 @@ public class MypageActivity extends AppCompatActivity {
         setListeners();
         initList();
 
+        SharedPreferences a = getSharedPreferences("a", MODE_PRIVATE);
+        SharedPreferences.Editor edit = a.edit();
+        edit.putString("selectedUser", SELECTED_USER);
+
         RecyclerView recyclerView = findViewById(R.id.mypage_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -53,6 +58,19 @@ public class MypageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }) ;
+        adapter.setOnRadioButtonClickListener(new MypageAdapter.OnRadioButtonClickListener() {
+            @Override
+            public void onRadioButtonClick(int position) {
+                MypageItem item = list.get(position);
+                String name = item.getName();
+                SELECTED_USER = name;
+                SharedPreferences a = getSharedPreferences("a", MODE_PRIVATE);
+                SharedPreferences.Editor editor = a.edit();
+                editor.putString("selectedUser", SELECTED_USER);
+                editor.commit();
+                //Log.d("MypageActivity","선택된 유저 : "+SELECTED_USER);
+            }
+        });
         recyclerView.setAdapter(adapter);
     }
 
@@ -68,7 +86,7 @@ public class MypageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), InfoActivity.class);
                 intent.putExtra(CODE, 101);
-                startActivityForResult(intent, INFO_REQ_CODE);
+                startActivity(intent);
             }
         });
         memberInfoBtn.setOnClickListener(new View.OnClickListener() {

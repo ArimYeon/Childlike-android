@@ -1,6 +1,7 @@
 package com.example.childlike;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,14 +25,23 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
     private ArrayList<MypageItem> mData = null;
     // 리스너 객체 참조를 저장하는 변수
     private OnButtonClickListener mListener = null ;
+    private OnRadioButtonClickListener rListener = null;
 
     public interface OnButtonClickListener {
         void onButtonClick(View v, int position) ;
     }
 
-    // OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
+    // OnButtonClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
     public void setOnButtonClickListener(OnButtonClickListener listener) {
         this.mListener = listener ;
+    }
+
+    public interface OnRadioButtonClickListener{
+        void onRadioButtonClick(int position);
+    }
+
+    public void setOnRadioButtonClickListener(OnRadioButtonClickListener listener){
+        this.rListener = listener;
     }
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
@@ -62,8 +72,11 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
                         lastCheckedRG.clearCheck();
                     }
                     lastCheckedRG = radioGroup;
-                    SELECTED_USER = nameText.getText().toString();
-                    //Log.d("MypageActivity","선택된 유저 : "+SELECTED_USER);
+
+                    int pos = getAdapterPosition();
+                    if(rListener != null){
+                        rListener.onRadioButtonClick(pos);
+                    }
                 }
             });
 
