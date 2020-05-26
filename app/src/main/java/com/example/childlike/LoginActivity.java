@@ -3,7 +3,6 @@ package com.example.childlike;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -14,7 +13,10 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.childlike.retrofit.RetrofitManager;
+import com.example.childlike.retrofit.retrofitdata.RequestAppuserPost;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -32,7 +34,13 @@ import com.kakao.util.exception.KakaoException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginActivity extends AppCompatActivity {
+
+    private Call<RequestAppuserPost> call;
 
     Session session;
     public static String kProfileImg;
@@ -112,7 +120,8 @@ public class LoginActivity extends AppCompatActivity {
                 // 사용자정보 요청에 성공한 경우,
                 @Override
                 public void onSuccess(MeV2Response result) {
-                    Log.i("KAKAO_API", "사용자 아이디: " + result.getId());
+                    String uid = Long.toString(result.getId());
+                    Log.i("KAKAO_API", "사용자 아이디: " + uid);
 
                     UserAccount kakaoAccount = result.getKakaoAccount();
                     if (kakaoAccount != null) {
@@ -156,6 +165,9 @@ public class LoginActivity extends AppCompatActivity {
                             kGender = gender.getValue();
                         }
                     }
+
+                    retrofitPutAppuserData(uid, kAge, kGender, kNick, kEmail);
+
                     SharedPreferences loginPref = getSharedPreferences("loginPref", MODE_PRIVATE);
                     int isLogin = loginPref.getInt("isLogin",0);
                     if(isLogin==0){
@@ -205,6 +217,27 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    private void retrofitPutAppuserData(String uid, String age, String gender, String name, String email){
+        RequestAppuserPost appuser = new RequestAppuserPost(uid, age, gender, name, email);
+        call = RetrofitManager.createApi().postAppuser(appuser);
+        call.enqueue(new Callback<RequestAppuserPost>() {
+            @Override
+            public void onResponse(Call<RequestAppuserPost> call, Response<RequestAppuserPost> response) {
+                if (response.isSuccessful()) {
+                    Log.d("retrofit","서버에 값을 전달했습니다 : ");
+                } else {
+                    Log.d("retrofit","서버에 값 전달을 실패했습니다 : "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RequestAppuserPost> call, Throwable t) {
+                Log.d("retrofit","서버와 통신중 에러가 발생했습니다 : "+t.toString());
+            }
+        });
+    }
+
+    //해시키 얻는 코드
     private void getHashKey(){
         PackageInfo packageInfo = null;
         try {
