@@ -143,22 +143,30 @@
     <Button
         android:id="@+id/logout_btn"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/button_height"
         android:fontFamily="@font/nanum_gothic_bold"
         android:text="@string/logout"
+        android:textSize="@dimen/button_text_size"
+        android:textColor="@color/pointColor"
         android:layout_margin="100dp"
+        android:background="@drawable/btn_background_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/member_info_layout"/>
+        app:layout_constraintTop_toBottomOf="@id/member_info_layout"
+        style="?android:attr/borderlessButtonStyle"/>
     <Button
         android:id="@+id/withdrawal_btn"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/button_height"
         android:fontFamily="@font/nanum_gothic_bold"
         android:text="@string/withdrawal"
+        android:textSize="@dimen/button_text_size"
+        android:textColor="@color/pointColor"
+        android:background="@drawable/btn_background_white"
         android:layout_margin="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logout_btn"/>
+        app:layout_constraintTop_toBottomOf="@id/logout_btn"
+        style="?android:attr/borderlessButtonStyle"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

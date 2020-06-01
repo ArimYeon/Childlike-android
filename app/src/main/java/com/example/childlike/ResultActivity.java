@@ -83,10 +83,10 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void initList(){
-        list.add(new ResultItem(R.drawable.logo3, "20.05.19", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
-        list.add(new ResultItem(R.drawable.logo3, "20.05.18", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
-        list.add(new ResultItem(R.drawable.logo3, "20.04.19", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
-        list.add(new ResultItem(R.drawable.logo3, "20.01.19", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
-        list.add(new ResultItem(R.drawable.logo3, "19.05.19", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
+        list.add(new ResultItem(R.drawable.t80, "20.05.19", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
+        list.add(new ResultItem(R.drawable.t80, "20.05.18", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
+        list.add(new ResultItem(R.drawable.t80, "20.04.19", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
+        list.add(new ResultItem(R.drawable.t80, "20.01.19", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
+        list.add(new ResultItem(R.drawable.t80, "19.05.19", "마음이 평온하고 행복합니다. 스트레스도 없습니다."));
     }
 }

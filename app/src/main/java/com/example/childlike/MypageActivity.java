@@ -99,11 +99,11 @@ public class MypageActivity extends AppCompatActivity {
     }
 
     private void initList(){
-        list.add(new MypageItem(R.drawable.logo3, "연아림", "24","여자"));
-        list.add(new MypageItem(R.drawable.logo3, "나희원", "24","여자"));
-        list.add(new MypageItem(R.drawable.logo3, "이슬기", "24","여자"));
-        list.add(new MypageItem(R.drawable.logo3, "정주연", "24","여자"));
-        list.add(new MypageItem(R.drawable.logo3, "이호진", "23","여자"));
-        list.add(new MypageItem(R.drawable.logo3, "김연정", "23","여자"));
+        list.add(new MypageItem(R.drawable.img_110x110, "연아림", "24","여자"));
+        list.add(new MypageItem(R.drawable.img_110x110, "나희원", "24","여자"));
+        list.add(new MypageItem(R.drawable.img_110x110, "이슬기", "24","여자"));
+        list.add(new MypageItem(R.drawable.img_110x110, "정주연", "24","여자"));
+        list.add(new MypageItem(R.drawable.img_110x110, "이호진", "23","여자"));
+        list.add(new MypageItem(R.drawable.img_110x110, "김연정", "23","여자"));
     }
 }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import static com.example.childlike.MypageActivity.SELECTED_USER;
 public class InfoActivity extends AppCompatActivity {
 
     TextView cmpBtn, name, age;
+    ImageView backBtn;
     Spinner sex;
     int code;
 
@@ -27,12 +29,19 @@ public class InfoActivity extends AppCompatActivity {
         name = findViewById(R.id.name_text);
         age = findViewById(R.id.age_text);
         sex = findViewById(R.id.sex_spin);
+        backBtn = findViewById(R.id.info_back_btn);
 
         setListeners();
         getIntentCode();
     }
 
     private void setListeners(){
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         cmpBtn.setOnClickListener(new View.OnClickListener() {
             Intent intent;
             @Override
@@ -59,5 +68,7 @@ public class InfoActivity extends AppCompatActivity {
     private void getIntentCode(){
         Intent intent = getIntent();
         code = intent.getIntExtra(CODE, 0);
+        if(code==100) backBtn.setVisibility(View.INVISIBLE);
+        else if(code==101) backBtn.setVisibility(View.VISIBLE);
     }
 }
