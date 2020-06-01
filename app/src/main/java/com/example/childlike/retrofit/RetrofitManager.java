@@ -4,14 +4,14 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitManager {
-    private final static String BASE_URL = "http://13.209.42.34:8000/api";
+    private final static String BASE_URL = "http://52.79.242.93:8000/api/";
 
-    private Retrofit retrofit = new Retrofit.Builder()
+    private static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    public IRetrofitApi createApi(){
+    public static IRetrofitApi createApi(){
         return retrofit.create(IRetrofitApi.class);
     }
 }

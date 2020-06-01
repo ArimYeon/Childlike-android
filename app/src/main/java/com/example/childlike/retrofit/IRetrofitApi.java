@@ -1,17 +1,16 @@
 package com.example.childlike.retrofit;
 
-import com.example.childlike.retrofit.retrofitmodel.RetrofitAppuserResponse;
+import com.example.childlike.retrofit.retrofitdata.RequestAppuserPost;
 
-import java.util.ArrayList;
 
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
 
 public interface IRetrofitApi {
 
-    @GET("appuser/{uid}")
-    public Call<ArrayList<RetrofitAppuserResponse>> getAppuser(
-            @Path("uid") String uid
+    @POST("appuser/")
+    Call<RequestAppuserPost> postAppuser(
+            @Body RequestAppuserPost appuser
     );
 }

@@ -59,7 +59,7 @@
         android:text="@string/result"
         android:textColor="@color/text"
         android:textSize="@dimen/text_size"
-        android:fontFamily="@font/nanum_gothic_bold"
+        android:fontFamily="@font/nanum_gothic"
         android:scrollbars="vertical" />
 
 </LinearLayout>

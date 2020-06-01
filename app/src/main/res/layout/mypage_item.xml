@@ -8,13 +8,14 @@
 
     <ImageView
         android:id="@+id/mypage_img"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/logo3"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:src="@drawable/img_110x110"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -27,6 +28,8 @@
             android:id="@+id/name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/mypage_item_text_margin"
+            android:fontFamily="@font/nanum_gothic"
             android:text="@string/name"
             android:textColor="@color/text"
             android:textSize="@dimen/text_size"
@@ -37,6 +40,8 @@
             android:id="@+id/age_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/mypage_item_text_margin"
+            android:fontFamily="@font/nanum_gothic"
             android:text="@string/age"
             android:textColor="@color/text"
             android:textSize="@dimen/text_size"
@@ -47,6 +52,7 @@
             android:id="@+id/sex_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_gothic"
             android:text="@string/sex"
             android:textColor="@color/text"
             android:textSize="@dimen/text_size"
@@ -55,28 +61,37 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <RadioGroup
             android:id="@+id/select_user_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <RadioButton
                 android:id="@+id/select_user_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </RadioGroup>
 
         <Button
             android:id="@+id/show_result_btn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/show_result"/>
+            android:layout_height="36dp"
+            android:layout_marginTop="@dimen/mypage_item_text_margin"
+            android:background="@drawable/btn_background_gray"
+            android:fontFamily="@font/nanum_gothic_bold"
+            android:text="@string/show_result"
+            android:textColor="@color/pointColor" />
 
     </LinearLayout>
 
