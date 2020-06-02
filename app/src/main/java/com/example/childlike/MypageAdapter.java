@@ -1,6 +1,7 @@
 package com.example.childlike;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +31,6 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
     public interface OnButtonClickListener {
         void onButtonClick(View v, int position) ;
     }
-
     // OnButtonClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
     public void setOnButtonClickListener(OnButtonClickListener listener) {
         this.mListener = listener ;
@@ -39,7 +39,7 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
     public interface OnRadioButtonClickListener{
         void onRadioButtonClick(int position);
     }
-
+    // OnRadioButtonClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
     public void setOnRadioButtonClickListener(OnRadioButtonClickListener listener){
         this.rListener = listener;
     }
@@ -72,6 +72,18 @@ public class MypageAdapter extends RecyclerView.Adapter<MypageAdapter.ViewHolder
                         lastCheckedRG.clearCheck();
                     }
                     lastCheckedRG = radioGroup;
+
+                    if(selectUser.isChecked()){
+                        selectUser.setText("선택됨");
+                        selectUser.setTextColor(Color.parseColor("#ffffff"));
+                        selectUser.setBackgroundResource(R.drawable.radio_btn_on);
+                    }
+                    else{
+                        selectUser.setText("선택하기");
+                        selectUser.setTextColor(Color.parseColor("#D5D5D5"));
+                        selectUser.setBackgroundResource(R.drawable.radio_btn_off);
+                    }
+
 
                     int pos = getAdapterPosition();
                     if(rListener != null){

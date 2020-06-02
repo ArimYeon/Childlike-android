@@ -9,4 +9,5 @@
     <color name="noticeText">#000000</color>
     <color name="text">#000000</color>
     <color name="pointColor">#44bfa7</color>
+    <color name="gray">#D5D5D5</color>
 </resources>

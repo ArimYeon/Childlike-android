@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.childlike.dataclass.SelectTestItem;
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<SelectTestItem> list = new ArrayList<>();
     ImageView mypageBtn;
+    TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mypageBtn = findViewById(R.id.mypage_btn);
+        title = findViewById(R.id.select_test_title);
 
         getSelectedUser();
         setListeners();
@@ -66,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
     private void getSelectedUser(){
         SharedPreferences a = getSharedPreferences("a", MODE_PRIVATE);
         SELECTED_USER = a.getString("selectedUser","");
+        String titleText = "님의 테스트 선택";
+        title.setText(SELECTED_USER+titleText);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getSelectedUser();
     }
 
     private void initList(){
