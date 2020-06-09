@@ -13,7 +13,6 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.childlike.retrofit.RetrofitManager;
 import com.example.childlike.retrofit.retrofitdata.RequestAppuserPost;
@@ -43,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     private Call<RequestAppuserPost> call;
 
     Session session;
+    public static String kuid;
     public static String kProfileImg;
     public static String kNick;
     public static String kAge = "비공개";
@@ -122,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onSuccess(MeV2Response result) {
                     String uid = Long.toString(result.getId());
                     Log.i("KAKAO_API", "사용자 아이디: " + uid);
+                    kuid = uid;
 
                     UserAccount kakaoAccount = result.getKakaoAccount();
                     if (kakaoAccount != null) {
@@ -166,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
 
-                    retrofitPutAppuserData(uid, kAge, kGender, kNick, kEmail);
+                    retrofitPutAppuserData(kuid, kAge, kGender, kNick, kEmail);
 
                     SharedPreferences loginPref = getSharedPreferences("loginPref", MODE_PRIVATE);
                     int isLogin = loginPref.getInt("isLogin",0);

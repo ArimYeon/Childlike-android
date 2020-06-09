@@ -14,16 +14,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.childlike.retrofit.IRetrofitApi;
+import com.example.childlike.retrofit.RetrofitManager;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.childlike.LoginActivity.kAge;
 import static com.example.childlike.LoginActivity.kEmail;
 import static com.example.childlike.LoginActivity.kGender;
 import static com.example.childlike.LoginActivity.kNick;
 import static com.example.childlike.LoginActivity.kProfileImg;
+import static com.example.childlike.LoginActivity.kuid;
 
 public class MemberInfoActivity extends AppCompatActivity {
 
@@ -120,6 +128,7 @@ public class MemberInfoActivity extends AppCompatActivity {
             }
             @Override
             public void onSuccess(Long result) {
+                deleteUser(result.toString());
                 Log.i("KAKAO_API", "연결 끊기 성공. id: " + result);
                 SharedPreferences loginPref = getSharedPreferences("loginPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = loginPref.edit();
@@ -134,5 +143,24 @@ public class MemberInfoActivity extends AppCompatActivity {
         final Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    private void deleteUser(String uid){
+        Call<ResponseBody> call = RetrofitManager.createApi().deleteAppuser(uid);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    Log.d("delete_appuser", "정상적으로 삭제되었습니다.");
+                }else{
+                    Log.d("delete_appuser", "삭제 실패하였습니다: "+response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("delete_appuser", t.toString());
+            }
+        });
     }
 }
