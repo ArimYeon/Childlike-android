@@ -1,6 +1,7 @@
 package com.example.childlike.retrofit;
 
 import com.example.childlike.retrofit.retrofitdata.RequestAppuserPost;
+import com.example.childlike.retrofit.retrofitdata.RequestChildrenPost;
 
 
 import okhttp3.MultipartBody;
@@ -27,8 +28,19 @@ public interface IRetrofitApi {
     );
 
     @Multipart
-    @POST("image/upload/")
+    @POST("image/userimage/")
     Call<RequestBody> uploadFile(
             @Part MultipartBody.Part file
+    );
+
+    @Multipart
+    @POST("image/userprofile/")
+    Call<RequestBody> uploadProfile(
+            @Part MultipartBody.Part file
+    );
+
+    @POST("api/children/")
+    Call<RequestChildrenPost> postChildren(
+            @Body RequestChildrenPost children
     );
 }

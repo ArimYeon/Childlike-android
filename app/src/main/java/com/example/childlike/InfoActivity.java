@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -16,18 +18,35 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.childlike.retrofit.RetrofitManager;
+import com.example.childlike.retrofit.retrofitdata.RequestChildrenPost;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
+import java.io.File;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.childlike.LoginActivity.CODE;
+import static com.example.childlike.LoginActivity.kuid;
 import static com.example.childlike.MypageActivity.SELECTED_USER;
 
 public class InfoActivity extends AppCompatActivity {
 
+    private Call<RequestBody> call;
+
     private static final int PICK_FROM_ALBUM = 1;
+
+    String imageFileName;
 
     TextView cmpBtn, name, age;
     ImageView backBtn, profileImg;
@@ -62,6 +81,8 @@ public class InfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SELECTED_USER = name.getText().toString();
+                RequestChildrenPost children = makeRequestChildrenPost();
+                retrofitPutChildrenData(children);
                 SharedPreferences a = getSharedPreferences("a", MODE_PRIVATE);
                 SharedPreferences.Editor editor = a.edit();
                 editor.putString("selectedUser", SELECTED_USER);
@@ -82,9 +103,43 @@ public class InfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tedPermission();
+
                 Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                intent. setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+
+                //Intent intent = new Intent(Intent.ACTION_PICK);
+                //intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 startActivityForResult(intent, PICK_FROM_ALBUM);
+            }
+        });
+    }
+
+    //RequestChildrenPost객체 생성
+    private RequestChildrenPost makeRequestChildrenPost(){
+        String cage = age.getText().toString();
+        String csex = sex.getSelectedItem().toString();
+        String cname = name.getText().toString();
+        RequestChildrenPost children = new RequestChildrenPost(cage, csex, cname, imageFileName ,kuid);
+        return children;
+    }
+
+    //retrofit으로 children 정보 서버에 저장
+    private void retrofitPutChildrenData(RequestChildrenPost children){
+        Log.d("children", children.getAge()+" "+children.getGender()+" "+children.getName()+" "+children.getImage()+" "+children.getUid());
+        Call<RequestChildrenPost> call = RetrofitManager.createApi().postChildren(children);
+        call.enqueue(new Callback<RequestChildrenPost>(){
+            @Override
+            public void onResponse(Call<RequestChildrenPost> call, Response<RequestChildrenPost> response) {
+                if (response.isSuccessful()) {
+                    Log.d("retrofit_children","서버에 값을 전달했습니다");
+                } else {
+                    Log.d("retrofit_children","서버에 값 전달을 실패했습니다 : "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RequestChildrenPost> call, Throwable t) {
+                Log.d("retrofit_children","서버와 통신중 에러가 발생했습니다 : "+t.toString());
             }
         });
     }
@@ -121,6 +176,9 @@ public class InfoActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK)
             {
                 try{
+                    String imagePath = getRealPathFromURI(data.getData());
+                    sendProfileImage(imagePath);
+
                     InputStream in = getContentResolver().openInputStream(data.getData());
                     Bitmap img = BitmapFactory.decodeStream(in);
                     in.close();
@@ -131,12 +189,45 @@ public class InfoActivity extends AppCompatActivity {
             }
             else if(resultCode == RESULT_CANCELED)
             {
-                Toast.makeText(this, "사진 선택 취소", Toast.LENGTH_LONG).show();
+               Log.e("image", "사진 선택 취소");
             }
         }
     }
 
+    private String getRealPathFromURI(Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        cursor.moveToFirst();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 
+        return cursor.getString(column_index);
+    }
+
+    private void sendProfileImage(String imagePath){
+        File file = new File(imagePath);
+        imageFileName = file.getName();
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part multiPartBody = MultipartBody.Part
+                .createFormData("uprofile", file.getName(), requestBody);
+        call = RetrofitManager.createApi().uploadProfile(multiPartBody);
+
+        call.enqueue(new Callback<RequestBody>() {
+            @Override
+            public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
+                if (response.isSuccessful()) {
+                    Log.d("profile_img_retrofit","서버에 이미지 전달 성공");
+                } else {
+                    Log.d("profile_img_retrofit","서버에 이미지 전달 실패 : "+response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RequestBody> call, Throwable t) {
+                Log.d("profile_img_retrofit", "fail "+t.toString());
+            }
+        });
+    }
 
     private void getIntentCode(){
         Intent intent = getIntent();
