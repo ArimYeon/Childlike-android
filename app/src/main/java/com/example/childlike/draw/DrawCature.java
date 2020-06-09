@@ -1,5 +1,7 @@
 package com.example.childlike.draw;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -19,10 +21,10 @@ public class DrawCature {
      * fn : 파일 이름
      * return : 성공 유무
      */
-    public static boolean PictureSaveToBitmapFile(View viw, final String fn )
+    public static boolean PictureSaveToBitmapFile(View viw, final File storage, final String filename)
     {
         boolean bRes = false;
-        if( viw == null && fn == null && fn.length() < 1 )
+        if( viw == null && filename == null && filename.length() < 1 )
             return bRes;
 
         viw.setDrawingCacheEnabled(true);
@@ -30,7 +32,7 @@ public class DrawCature {
         if( bmp == null )
             return bRes;
 
-        File file = new File( fn );
+        File file = new File(storage, filename+".png");
         FileOutputStream fOut = null;
         try {
             fOut = new FileOutputStream(file);
@@ -58,12 +60,12 @@ public class DrawCature {
      * fn : 파일 이름
      * return : bitmap 이미지, 실패했을 경우 null
      */
-    public static Bitmap BitmapLoadFromFile( final String fn )
+    public static Bitmap BitmapLoadFromFile( final File storage, final String filename )
     {
         Bitmap bmp = null;
         try
         {
-            bmp = BitmapFactory.decodeFile( fn );
+            bmp = BitmapFactory.decodeFile( storage + "/" + filename);
         }catch( Exception e)
         {
             Log.e(LOGTAG, e.getMessage());
