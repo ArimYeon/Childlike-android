@@ -65,8 +65,10 @@ public class MypageActivity extends AppCompatActivity {
             public void onButtonClick(View v, int position) {
                 RequestChildrenGet item = list.get(position);
                 String name = item.getName();
+                String uid = item.getUid();
                 Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
                 intent.putExtra("name", name);
+                intent.putExtra("uid", uid);
                 intent.putExtra("code",RESULT_FROM_MYPAGE_CODE);
                 startActivity(intent);
             }
@@ -130,18 +132,4 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
     }
-
-    /*
-    private void setMypageDataList(ArrayList<RequestChildrenGet> retrofitList){
-        for(int i=0; i<retrofitList.size(); i++){
-            list.add(new MypageItem(
-                    retrofitList.get(i).getImage(),
-                    retrofitList.get(i).getName(),
-                    retrofitList.get(i).getAge(),
-                    retrofitList.get(i).getGender()
-            ));
-        }
-        //adapter.setData();
-    }
-    */
 }

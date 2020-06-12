@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.childlike.retrofit.RetrofitManager;
 import com.example.childlike.retrofit.retrofitdata.RequestChildrenPost;
@@ -25,9 +24,7 @@ import com.gun0912.tedpermission.TedPermission;
 
 import java.io.File;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -46,7 +43,7 @@ public class InfoActivity extends AppCompatActivity {
 
     private static final int PICK_FROM_ALBUM = 1;
 
-    String imageFileName;
+    String imageFileName = null;
 
     TextView cmpBtn, name, age;
     ImageView backBtn, profileImg;
@@ -119,7 +116,13 @@ public class InfoActivity extends AppCompatActivity {
         String cage = age.getText().toString();
         String csex = sex.getSelectedItem().toString();
         String cname = name.getText().toString();
-        RequestChildrenPost children = new RequestChildrenPost(cage, csex, cname, imageFileName ,kuid);
+        RequestChildrenPost children;
+        if(imageFileName!=null){
+            children = new RequestChildrenPost(cage, csex, cname, imageFileName ,kuid);
+        }
+        else{
+            children = new RequestChildrenPost(cage, csex, cname, null ,kuid);
+        }
         return children;
     }
 
