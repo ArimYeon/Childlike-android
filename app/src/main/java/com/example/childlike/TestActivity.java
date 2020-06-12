@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.childlike.draw.DrawView;
 import com.example.childlike.retrofit.RetrofitManager;
+import com.example.childlike.retrofit.retrofitdata.RequestResultPost;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -72,14 +73,18 @@ public class TestActivity extends AppCompatActivity {
         completeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String date = nowDate();
+                String date = nowDateForImgName();
                 String filename = kuid+"_"+date;
                 Log.d("img_date","이미지 파일명: "+filename);
                 storeImage(filename);
                 uploadImage(filename);
+                //itype 임의 지정 해놨음
+                RequestResultPost item = new RequestResultPost(SELECTED_USER, filename+".png", nowDate(), kuid, "2");
+                retrofitResultPost(item);
                 Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
                 intent.putExtra("code", 202);
                 intent.putExtra("name", SELECTED_USER);
+                intent.putExtra("uid", kuid);
                 startActivity(intent);
                 finish();
             }
@@ -126,13 +131,38 @@ public class TestActivity extends AppCompatActivity {
         });
     }
 
+    private void retrofitResultPost(RequestResultPost resultItem){
+        Call<RequestResultPost> call = RetrofitManager.createApi().postResult(resultItem);
+        call.enqueue(new Callback<RequestResultPost>() {
+            @Override
+            public void onResponse(Call<RequestResultPost> call, Response<RequestResultPost> response) {
+                if (response.isSuccessful()) {
+                    Log.d("retrofit_result_post","서버에 값을 전달했습니다");
+                } else {
+                    Log.d("retrofit_result_post","서버에 값 전달을 실패했습니다 : "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RequestResultPost> call, Throwable t) {
+                Log.d("retrofit_result_post","서버와 통신중 에러가 발생했습니다 : "+t.toString());
+            }
+        });
+    }
+
     //오늘 날짜,시간 받아오기
-    private String nowDate(){
+    private String nowDateForImgName(){
         long now = System.currentTimeMillis();
         Date date = new Date(now);
         SimpleDateFormat sdfNow = new SimpleDateFormat("yyMMddHHmmss");
         String formatDate = sdfNow.format(date);
-
+        return formatDate;
+    }
+    private String nowDate(){
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat sdfNow = new SimpleDateFormat("yy.MM.dd");
+        String formatDate = sdfNow.format(date);
         return formatDate;
     }
 }

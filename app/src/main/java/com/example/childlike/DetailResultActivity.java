@@ -49,6 +49,7 @@ public class DetailResultActivity extends AppCompatActivity {
     }
 
     private void setTexts(){
+        userImg.setImageBitmap(bitmap);
         dateText.setText(date);
         resultText.setText(result);
     }
@@ -57,7 +58,6 @@ public class DetailResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         img = intent.getStringExtra("img");
         downloadUserDrawImg(img);
-        userImg.setImageBitmap(bitmap);
         date = intent.getStringExtra("date");
         result = intent.getStringExtra("result");
     }
