@@ -2,13 +2,13 @@ package com.example.childlike.dataclass;
 
 public class MypageItem {
 
-    int img;
+    String img;
     String name;
     String age;
     String sex;
 
 
-    public MypageItem(int img, String name, String age, String sex) {
+    public MypageItem(String img, String name, String age, String sex) {
         this.img = img;
         this.name = name;
         this.age = age;
@@ -19,7 +19,7 @@ public class MypageItem {
         return name;
     }
 
-    public int getImg() {
+    public String getImg() {
         return img;
     }
 
