@@ -3,10 +3,11 @@ package com.example.childlike.retrofit;
 import com.example.childlike.retrofit.retrofitdata.RequestAppuserPost;
 import com.example.childlike.retrofit.retrofitdata.RequestChildrenGet;
 import com.example.childlike.retrofit.retrofitdata.RequestChildrenPost;
+import com.example.childlike.retrofit.retrofitdata.RequestCommentsGet;
+import com.example.childlike.retrofit.retrofitdata.RequestResultGet;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -52,5 +53,16 @@ public interface IRetrofitApi {
     @GET("api/children/{uid}")
     Call<ArrayList<RequestChildrenGet>> getChildren(
             @Path("uid") String userId
+    );
+
+    @GET("api/result/{uid}/{name}")
+    Call<ArrayList<RequestResultGet>> getResult(
+            @Path("uid") String uid,
+            @Path("name") String name
+    );
+
+    @GET("api/comments/{itype}")
+    Call<RequestCommentsGet> getComment(
+            @Path("itype") String itype
     );
 }

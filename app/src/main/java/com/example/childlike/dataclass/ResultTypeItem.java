@@ -1,14 +1,13 @@
 package com.example.childlike.dataclass;
 
-public class ResultItem {
-
+public class ResultTypeItem {
     String img;
-    String date, result;
+    String date, type;
 
-    public ResultItem(String img, String date, String result) {
+    public ResultTypeItem(String img, String date, String type) {
         this.img = img;
         this.date = date;
-        this.result = result;
+        this.type = type;
     }
 
     public String getDate() {
@@ -19,7 +18,7 @@ public class ResultItem {
         return img;
     }
 
-    public String getResult() {
-        return result;
+    public String getType() {
+        return type;
     }
 }
