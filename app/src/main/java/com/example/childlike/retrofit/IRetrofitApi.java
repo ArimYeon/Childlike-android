@@ -5,6 +5,7 @@ import com.example.childlike.retrofit.retrofitdata.RequestChildrenGet;
 import com.example.childlike.retrofit.retrofitdata.RequestChildrenPost;
 import com.example.childlike.retrofit.retrofitdata.RequestCommentsGet;
 import com.example.childlike.retrofit.retrofitdata.RequestResultGet;
+import com.example.childlike.retrofit.retrofitdata.RequestResultPost;
 
 
 import java.util.ArrayList;
@@ -59,6 +60,11 @@ public interface IRetrofitApi {
     Call<ArrayList<RequestResultGet>> getResult(
             @Path("uid") String uid,
             @Path("name") String name
+    );
+
+    @POST("api/result/")
+    Call<RequestResultPost> postResult(
+            @Body RequestResultPost result
     );
 
     @GET("api/comments/{itype}")
