@@ -23,6 +23,7 @@ public class DetailResultActivity extends AppCompatActivity {
     String date, result, img;
     ImageView backBtn, userImg;
     TextView dateText, resultText;
+    int code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,13 @@ public class DetailResultActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                if(code==201){
+                    finish();
+                } else if(code==202){
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags(intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -60,6 +67,7 @@ public class DetailResultActivity extends AppCompatActivity {
         downloadUserDrawImg(img);
         date = intent.getStringExtra("date");
         result = intent.getStringExtra("result");
+        code = intent.getIntExtra("code",0);
     }
 
     private void downloadUserDrawImg(final String image){

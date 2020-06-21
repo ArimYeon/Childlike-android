@@ -30,7 +30,7 @@ public class ResultActivity extends AppCompatActivity {
     private ArrayList<ResultTypeItem> typeList = new ArrayList<>();
     private ArrayList<RequestResultGet> apiData = new ArrayList<>();
 
-    int code;
+    //int code;
     String name, uid;
     ImageView backBtn;
     TextView title;
@@ -63,6 +63,7 @@ public class ResultActivity extends AppCompatActivity {
                 String date = item.getDate();
                 String result = item.getResult();
                 Intent intent = new Intent(getApplicationContext(), DetailResultActivity.class);
+                intent.putExtra("code",201);
                 intent.putExtra("img", img);
                 intent.putExtra("date", date);
                 intent.putExtra("result", result);
@@ -76,6 +77,8 @@ public class ResultActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
+                /*
                 //테스트페이지에서 왔으면 mainActivity로
                 //마이페이지에서 왔으면 마이페이지로
                 if(code==201){
@@ -85,6 +88,7 @@ public class ResultActivity extends AppCompatActivity {
                     intent.addFlags(intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(intent);
                 }
+                 */
             }
         });
     }
@@ -145,7 +149,7 @@ public class ResultActivity extends AppCompatActivity {
 
     private void getIntentCode(){
         Intent intent = getIntent();
-        code = intent.getIntExtra("code", 0);
+        //code = intent.getIntExtra("code", 0);
         name = intent.getStringExtra("name");
         uid = intent.getStringExtra("uid");
     }

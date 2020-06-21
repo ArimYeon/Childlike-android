@@ -10,8 +10,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.childlike.dataclass.ResultItem;
+import com.example.childlike.dataclass.ResultTypeItem;
 import com.example.childlike.draw.DrawView;
 import com.example.childlike.retrofit.RetrofitManager;
+import com.example.childlike.retrofit.retrofitdata.RequestCommentsGet;
 import com.example.childlike.retrofit.retrofitdata.RequestResultPost;
 
 import java.io.File;
@@ -36,6 +39,9 @@ public class TestActivity extends AppCompatActivity {
 
     private Call<RequestBody> call;
 
+    RequestResultPost item;
+    //String comment;
+
     TextView title;
     ImageView backBtn;
     DrawView drawView;
@@ -54,7 +60,6 @@ public class TestActivity extends AppCompatActivity {
         completeBtn = findViewById(R.id.complete_btn);
         getIntentData();
         setListeners();
-
     }
 
     private void getIntentData(){
@@ -79,13 +84,18 @@ public class TestActivity extends AppCompatActivity {
                 storeImage(filename);
                 uploadImage(filename);
                 //itype 임의 지정 해놨음
-                RequestResultPost item = new RequestResultPost(SELECTED_USER, filename+".png", nowDate(), kuid, "2");
+                item = new RequestResultPost(SELECTED_USER, filename+".png", nowDate(), kuid, "7");
                 retrofitResultPost(item);
-                Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LoadingActivity.class);
                 intent.putExtra("code", 202);
-                intent.putExtra("name", SELECTED_USER);
-                intent.putExtra("uid", kuid);
+                intent.putExtra("img", filename+".png");
+                intent.putExtra("date", nowDate());
+                //intent.putExtra("result", comment);
+                intent.putExtra("itype", item.getItype());
+                //intent.putExtra("name", SELECTED_USER);
+                //intent.putExtra("uid", kuid);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 finish();
             }
         });
@@ -150,7 +160,7 @@ public class TestActivity extends AppCompatActivity {
         });
     }
 
-    //오늘 날짜,시간 받아오기
+    //이미지 파일명 지정 시 들어갈 날짜 형태
     private String nowDateForImgName(){
         long now = System.currentTimeMillis();
         Date date = new Date(now);
@@ -158,6 +168,7 @@ public class TestActivity extends AppCompatActivity {
         String formatDate = sdfNow.format(date);
         return formatDate;
     }
+    //결과 저장 시 날짜 형태
     private String nowDate(){
         long now = System.currentTimeMillis();
         Date date = new Date(now);
